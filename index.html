@@ -1,1 +1,285 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alesanco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+  <style>
+    /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+    * {
+      box-sizing: border-box;
+      transition: .5s ease-in-out;
+    }
+
+    html, body {
+      background-color: #220200;
+      height: 100%;
+      overflow: hidden;
+      font-family: helvetica neue,helvetica,arial,sans-serif;
+    }
+    html h1, body h1 {
+      font-size: 25px;
+      font-weight: 200;
+      color: white;
+      line-height: 30px;
+      margin-bottom: 10px;
+    }
+    html h2, body h2 {
+      font-size: 15px;
+      color: #6b0500;
+    }
+
+    #wrapper {
+      opacity: 0;
+      display: table;
+      height: 100%;
+      width: 100%;
+    }
+    #wrapper.loaded {
+      opacity: 1;
+      transition: 2.5s ease-in-out;
+    }
+    #wrapper #content {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    #card {
+      height: 400px;
+      width: 300px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      perspective: 600px;
+    }
+    #card #front, #card #back {
+      border-radius: 10px;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    #card #front {
+      transform: rotateY(0deg);
+      overflow: hidden;
+      z-index: 1;
+    }
+    #card #front #arrow {
+      position: absolute;
+      height: 50px;
+      line-height: 50px;
+      font-size: 30px;
+      z-index: 10;
+      bottom: 0;
+      right: 50px;
+      color: rgba(255, 255, 255, 0.5);
+      animation: arrowWiggle 1s ease-in-out infinite;
+    }
+    #card #front #top-pic {
+      height: 50%;
+      width: 100%;
+      background-image: url(images/background.jpg);
+      background-size: cover;
+    }
+    #card #front #avatar {
+      width: 114px;
+      height: 114px;
+      top: 50%;
+      left: 50%;
+      margin: -77px 0 0 -57px;
+      border-radius: 100%;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0 4px 5px rgba(107, 5, 0, 0.6), 0 0 50px 50px rgba(255, 255, 255, 0.25);
+      background-image: url(images/avatar.png);
+      background-size: contain;
+      position: absolute;
+      z-index: 1;
+    }
+    #card #front #info-box {
+      height: 50%;
+      width: 100%;
+      position: absolute;
+      display: table;
+      left: 0;
+      bottom: 0;
+      background: rgba(200, 38, 29, 0.7);
+      padding: 50px;
+    }
+    #card #front #social-bar {
+      height: 50px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      line-height: 50px;
+      font-size: 18px;
+      text-align: center;
+    }
+    #card #front #social-bar a {
+      display: inline-block;
+      color: #951009;
+      text-decoration: none;
+      padding: 5px;
+      line-height: 18px;
+      border-radius: 5px;
+    }
+    #card #front #social-bar a:hover {
+      color: #450300;
+      background: rgba(255, 255, 255, 0.3);
+      transition: .25s ease-in-out;
+    }
+    #card #back {
+      transform: rotateY(180deg);
+      background-color: rgba(255, 255, 255, 0.6);
+      display: table;
+      z-index: 2;
+      font-size: 13px;
+      line-height: 20px;
+      padding: 40px;
+    }
+    #card #back p {
+      margin-bottom: 10px;
+    }
+    #card #back p.justify {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    #card #back p.center {
+      text-align: center;
+    }
+    #card #back #social-bar {
+      height: 50px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      line-height: 50px;
+      font-size: 18px;
+      text-align: center;
+    }
+    #card #back #social-bar a {
+      display: inline-block;
+      line-height: 18px;
+      color: #951009;
+      text-decoration: none;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    #card #back #social-bar a:hover {
+      color: #450300;
+      background: rgba(223, 74, 66, 0.5);
+      transition: .25s ease-in-out;
+    }
+    #card .info {
+      display: table-cell;
+      height: 100%;
+      vertical-align: middle;
+      text-align: center;
+    }
+    #card.flip #front {
+      transform: rotateY(180deg);
+    }
+    #card.flip #back {
+      transform: rotateY(360deg);
+    }
+
+    #background {
+      position: fixed;
+      background-color: black;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #background #background-image {
+      height: calc(100% + 60px);
+      width: calc(100% + 60px);
+      position: absolute;
+      top: -30px;
+      left: -30px;
+      -webkit-filter: blur(10px);
+      background-image: url(images/background.jpg);
+      background-size: cover;
+    }
+
+    @keyframes arrowWiggle {
+      0% { right: 40px; }
+      50% { right: 35px; }
+      100% { right: 40px; }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="content">
+      <div id="card">
+        <div id="front">
+          <div id="arrow"><i class="fa fa-arrow-left"></i></div>
+          <div id="top-pic"></div>
+          <div id="avatar"></div>
+          <div id="info-box">
+            <div class="info">
+              <h1>Alesanco</h1>
+              <h2>Cybersecurity Enthusiast</h2>
+            </div>
+          </div>
+          <div id="social-bar">
+            <a href="https://linkedin.com/in/alessandroinnocenzi" target="_blank">
+              <i class="fa fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/Alesanco83" target="_blank">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="https://github.com/alesanco" target="_blank">
+              <i class="fa fa-github"></i>
+            </a>
+            <a href="https://medium.com/@alesanco" target="_blank">
+              <i class="fa fa-medium"></i>
+            </a>
+            <a href="javascript:void" class="more-info">
+              <i class="fa fa-rebel"></i>
+            </a>
+          </div>
+        </div>
+        <div id="back">
+          <div class="back-info">
+            <p class="justify">Hello! I'm Alesanco! I'm software developer, security enthusiast, nerd and bartender.</p>
+            <p class="justify">I have a great passion for electronics, telecommunications and information technology, that brings me to a lot of things, such as LEGO Mindstorms, Arduino, Blockchain, development in different environments and so on.</p>
+            <p class="justify">I like studying, learning and improving my skills. I think it's important to share knowledge to growth all together.</p>
+            <p class="center">May the Force be with you.</p>
+          </div>
+          <div id="social-bar">
+              <a href="https://linkedin.com/in/alessandroinnocenzi" target="_blank">
+                <i class="fa fa-linkedin"></i>
+              </a>
+              <a href="https://twitter.com/Alesanco83" target="_blank">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="https://github.com/alesanco" target="_blank">
+                <i class="fa fa-github"></i>
+              </a>
+              <a href="https://medium.com/@alesanco" target="_blank">
+                <i class="fa fa-medium"></i>
+              </a>
+            <a href="javascript:void" class="more-info">
+              <i class="fa fa-undo"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="background">
+        <div id="background-image"></div>
+      </div>
+    </div>
+  </div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
