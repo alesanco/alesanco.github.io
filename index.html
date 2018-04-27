@@ -29,7 +29,8 @@
     }
     html h2, body h2 {
       font-size: 15px;
-      color: #deb887;
+      color: #8a8a8a;
+      line-height: 20px;
     }
 
     #wrapper {
@@ -55,7 +56,7 @@
       z-index: 1;
       perspective: 600px;
     }
-    #card #front, #card #back {
+    #card #front {
       border-radius: 10px;
       height: 100%;
       width: 100%;
@@ -65,8 +66,6 @@
       transform-style: preserve-3d;
       backface-visibility: hidden;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    #card #front {
       transform: rotateY(0deg);
       overflow: hidden;
       z-index: 1;
@@ -97,7 +96,7 @@
       display: table;
       left: 0;
       bottom: 0;
-      background: rgba(200, 38, 29, 0.7);
+      background: #2a2a2a;
       padding: 50px;
     }
     #card #front #social-bar {
@@ -122,55 +121,11 @@
       background: rgba(255, 255, 255, 0.3);
       transition: .25s ease-in-out;
     }
-    #card #back {
-      transform: rotateY(180deg);
-      background-color: rgba(255, 255, 255, 0.6);
-      display: table;
-      z-index: 2;
-      font-size: 13px;
-      line-height: 20px;
-      padding: 40px;
-    }
-    #card #back p {
-      margin-bottom: 10px;
-    }
-    #card #back .back-info {
-      text-align: justify;
-      text-justify: inter-word;
-    }
-    #card #back #social-bar {
-      height: 50px;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      line-height: 50px;
-      font-size: 18px;
-      text-align: center;
-    }
-    #card #back #social-bar a {
-      display: inline-block;
-      line-height: 18px;
-      color: #951009;
-      text-decoration: none;
-      padding: 5px;
-      border-radius: 5px;
-    }
-    #card #back #social-bar a:hover {
-      background: rgba(223, 74, 66, 0.5);
-      transition: .25s ease-in-out;
-    }
     #card .info {
       display: table-cell;
       height: 100%;
       vertical-align: middle;
       text-align: center;
-    }
-    #card.flip #front {
-      transform: rotateY(180deg);
-    }
-    #card.flip #back {
-      transform: rotateY(360deg);
     }
 
     #background {
@@ -222,34 +177,6 @@
             <a href="https://medium.com/@alesanco" target="_blank">
               <i class="fa fa-medium"></i>
             </a>
-            <a class="more-info">
-              <i class="fa fa-rebel"></i>
-            </a>
-          </div>
-        </div>
-        <div id="back">
-          <div class="back-info">
-            <p>Hello! I'm Alesanco! I'm software architect, security enthusiast, nerd and bartender.</p>
-            <p>I have a great passion for electronics, telecommunications and information technology, that brings me to a lot of things, such as LEGO Mindstorms, Arduino, Blockchain, development in different environments and so on.</p>
-            <p>I like studying, learning and improving my skills. I think it's important to share knowledge to growth all together.</p>
-            <script src="https://www.hackthebox.eu/badge/15319"></script>
-          </div>
-          <div id="social-bar">
-              <a href="https://linkedin.com/in/alessandroinnocenzi" target="_blank">
-                <i class="fa fa-linkedin"></i>
-              </a>
-              <a href="https://twitter.com/Alesanco83" target="_blank">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a href="https://github.com/alesanco" target="_blank">
-                <i class="fa fa-github"></i>
-              </a>
-              <a href="https://medium.com/@alesanco" target="_blank">
-                <i class="fa fa-medium"></i>
-              </a>
-            <a class="more-info">
-              <i class="fa fa-undo"></i>
-            </a>
           </div>
         </div>
       </div>
@@ -259,6 +186,10 @@
     </div>
   </div>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="js/index.js"></script>
+  <script>
+    $(window).load(function() {
+      $('#wrapper').addClass('loaded');
+    });
+  </script>
 </body>
 </html>
