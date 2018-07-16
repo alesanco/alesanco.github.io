@@ -9,7 +9,14 @@
 .div-center
 {
      margin: 0 auto;
-     width: 650px;
+     font-size: 1.5vw;
+}
+
+.container {
+  margin: 0 auto;
+  font-size: 1.5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 /* Comment */
