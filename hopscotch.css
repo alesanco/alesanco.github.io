@@ -6,6 +6,22 @@
  * This work is licensed under the Creative Commons CC0 1.0 Universal License
  */
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #322931; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #8fc13e; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #149b93; 
+}
+
 .container {
   margin: 0 auto;
   font-size: 1vw;
