@@ -12,8 +12,7 @@
     <div class="container">
     <div></div>
       <div>
-        <pre>
-          <code class="cpp">/*
+<pre><code class="cpp">/*
 * Hello, you've to compile and run it to get information about me!
 *
 * Save this code in main.c, GET all other files and run the following command:
@@ -62,15 +61,13 @@ int main(int argc, char **argv)
   int contacts_size = sizeof(base64_contacts) / sizeof(base64_contacts[0]);
 
   char decoded_contact[32] = ""; // Stack Buffer Overflow? Maybe.
-  for (size_t i = 0; i < contacts_size; i++) {
+  for (size_t i = 0; i &lt; contacts_size; i++) {
     base64_decode(base64_contacts[i], decoded_contact);
     printf("%s%s\n", protocol, decoded_contact);
   }
 
   return SUCCESS;
-}
-          </code>
-        </pre>
+}</code></pre>
       </div>
     </div>
   </body>
