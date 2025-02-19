@@ -46,7 +46,7 @@ int brainfuck_interpreter(char filename[])
         if (m->next == 0) {
           if ((m->next = calloc(1, sizeof*m)) == 0) return FAILURE;
           m->next->prev = m;
-         }
+        }
         m = m->next;
         break;
     }
